@@ -13,7 +13,7 @@ function AddUser ({handleAddUser}) {
     const [lastNameError, setLastNameError] = useState('')
     const [formValid, setFormValid] = useState(false);  
     const [toggleForm,setToggleForm] = useState(true)
-       
+    const [sw, setSw] = useState(false)
 
     const validateForm = useCallback(() => {
         let isProfileValid = true;
@@ -58,14 +58,14 @@ function AddUser ({handleAddUser}) {
     },  [profile, email, firstName, lastName])
 
     useEffect(() => {
-        validateForm();
+        if(!sw)setSw(true)
+        if(sw) validateForm();
     },[validateForm])
       
     const handleSubmit = (e) => {
 
 
         e.preventDefault()
-
         if (formValid) {
             //if data valid, create a new data object 
             const newFormData = {
@@ -88,7 +88,11 @@ function AddUser ({handleAddUser}) {
                 localStorage.setItem('formData', JSON.stringify(formDataArray));
             }
             handleAddUser();
-            
+
+        } else {
+            if(!sw)setSw(true)
+            if(sw) validateForm();
+
         }
 
     }
@@ -124,7 +128,7 @@ function AddUser ({handleAddUser}) {
                     }
                 </div>
                 
-                <Button color='primary'>Submit</Button>
+                <Button color='primary' className='w-25'>Submit</Button>
             </div>
         
         </form>
