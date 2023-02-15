@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {Container, Table, Button} from 'reactstrap';
-import FormTemplate from './FormTemplate'
+import AddUser from './AddUser'
 
 function Index() {
 
@@ -13,7 +13,7 @@ function Index() {
 			</div>
 			
 			{toggleForm && 
-				<FormTemplate />
+				<AddUser />
 			}
 
 			<Table className='mt-3'>
