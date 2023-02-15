@@ -1,17 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {Container, Table, Button} from 'reactstrap';
 import AddUser from './AddUser'
+import {MdOutlineEdit} from 'react-icons/md'
+import {AiFillDelete} from 'react-icons/ai'
 
 function Index() {
 
 	const [toggleForm, setToggleForm] = useState(false)
 	const [userData, setUserData] = useState([]);
 
-	useEffect(() => {
+	const getUserData = () => {
 		let data = JSON.parse(localStorage.getItem('formData'))
 		setUserData(data)
+	}
+	useEffect(() => {
+		getUserData();
 	}, [])
 
+
+
+	const handleAddUser = useCallback(() => {
+		let data = JSON.parse(localStorage.getItem('formData')) || []
+		localStorage.setItem('formData', JSON.stringify([...data]))
+		getUserData()
+	}, [])
 
 	return (
 		<Container>
@@ -20,7 +32,7 @@ function Index() {
 			</div>
 			
 			{toggleForm && 
-				<AddUser />
+				<AddUser  handleAddUser={handleAddUser} />
 			}
 
 			<Table className='mt-5'>
@@ -31,6 +43,7 @@ function Index() {
 						<th>Email</th>
 						<th>First Name</th>
 						<th>Last Name</th>
+						<th>Action</th>
 						<th />
 					</tr>
 				</thead>
@@ -38,47 +51,25 @@ function Index() {
 				{userData && userData.length > 0 &&
 				<tbody>
 				{userData.map((user, index) => {
-					return (
+					return user ?(
 						<tr key={index}>
-						<th scope='row'>{index +1}</th>
-						<td>{userData? user.profile : 'No profile specified'}</td>
-						<td>{userData? user.email : 'No email specified'}</td>
-						<td>{userData? user.firstName : 'No first name specified'}</td>
-						<td>{userData? user.lastName : 'No last name specified'}</td>
-						<td />
-					</tr>
-					)
+							<th scope='row'>{index +1}</th>
+							<td>{user.profile}</td>
+							<td>{user.email}</td>
+							<td>{user.firstName}</td>
+							<td>{user.lastName}</td>
+							<td>
+								<MdOutlineEdit className='action-icons'/> 
+								<AiFillDelete className='action-icons'/> 
+							</td>
+						</tr>
+					)  : null
 				})}
 				
 					
 				</tbody>	
 			}
-				{/* <tbody>
-					<tr>
-						<th scope='row'>1</th>
-						<td>{userData ? userData[0].profile : null}</td>
-						<td />
-						<td>Mark</td>
-						<td>Otto</td>
-						<td />
-					</tr>
-					<tr>
-						<th scope='row'>2</th>
-						<td />
-						<td />
-						<td>Jacob</td>
-						<td>Thornton</td>
-						<td />
-					</tr>
-					<tr>
-						<th scope='row'>3</th>
-						<td />
-						<td />
-						<td>Larry</td>
-						<td>the Bird</td>
-						<td />
-					</tr>
-				</tbody> */}
+
 			</Table>
 		</Container>
 	);
