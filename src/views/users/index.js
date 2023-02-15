@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Container, Table, Button} from 'reactstrap';
+import FormTemplate from './FormTemplate'
 
 function Index() {
+
+	const [toggleForm, setToggleForm] = useState(false)
+	
 	return (
 		<Container>
 			<div className='mt-3 text-right'>
-				<Button color='primary'>+ Add User</Button>
+				<Button color='primary' onClick={() => setToggleForm(!toggleForm)}>+ Add User</Button>
 			</div>
+			
+			{toggleForm && 
+				<FormTemplate />
+			}
 
 			<Table className='mt-3'>
 				<thead>
