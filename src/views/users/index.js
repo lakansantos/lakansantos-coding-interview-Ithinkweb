@@ -15,7 +15,7 @@ function Index() {
 	}
 	useEffect(() => {
 		getUserData();
-	}, [])
+	}, [setUserData])
 
 
 
@@ -23,6 +23,7 @@ function Index() {
 		let data = JSON.parse(localStorage.getItem('formData')) || []
 		localStorage.setItem('formData', JSON.stringify([...data]))
 		getUserData()
+		setToggleForm(false)
 	}, [])
 
 	return (
@@ -59,8 +60,10 @@ function Index() {
 							<td>{user.firstName}</td>
 							<td>{user.lastName}</td>
 							<td>
-								<MdOutlineEdit className='action-icons'/> 
-								<AiFillDelete className='action-icons'/> 
+								<div className="d-flex gap-3">
+									<MdOutlineEdit className='action-icons'/> 
+									<AiFillDelete className='action-icons'/> 
+								</div>
 							</td>
 						</tr>
 					)  : null

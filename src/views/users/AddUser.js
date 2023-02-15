@@ -12,42 +12,10 @@ function AddUser ({handleAddUser}) {
     const [lastName, setLastName] = useState('')
     const [lastNameError, setLastNameError] = useState('')
     const [formValid, setFormValid] = useState(false);  
-    
-
+    const [toggleForm,setToggleForm] = useState(true)
        
 
-    const formValidate = useCallback(() => {
-        if (formValid) {
-            //if data valid, create a new data object 
-            const newFormData = {
-                profile: profile,
-                email: email,
-                firstName: firstName,
-                lastName: lastName,
-            };
-            
-            // Retrieve existing data from localStorage
-            const storedData = localStorage.getItem('formData');
-            // If data already exists, append the new data to it
-            if (storedData) {
-                const parsedData = JSON.parse(storedData);
-                parsedData.push(newFormData);
-                localStorage.setItem('formData', JSON.stringify(parsedData));
-            } else {
-                // If no data exists, create a new array and save the new data
-                const formDataArray = [newFormData];
-                localStorage.setItem('formData', JSON.stringify(formDataArray));
-            }
-            handleAddUser();
-        }
-    
-    }, [email, firstName, formValid, handleAddUser, lastName, profile])
-    
-
-    const handleSubmit = (e) => {
-
-
-        e.preventDefault()
+    const validateForm = useCallback(() => {
         let isProfileValid = true;
         let isEmailValid = true;
         let isFirstNameValid = true;
@@ -55,6 +23,7 @@ function AddUser ({handleAddUser}) {
         if(profile === '') {
             setProfileError('Profile is required!')
             isProfileValid  = false
+
         } else {
             setProfileError('')
         }
@@ -86,19 +55,46 @@ function AddUser ({handleAddUser}) {
 
 
         setFormValid(isProfileValid && isEmailValid && isFirstNameValid && isLastNameValid);
-
-
-        formValidate();
-       
-    }
+    },  [profile, email, firstName, lastName])
 
     useEffect(() => {
-        formValidate()
-    }, [formValidate])
+        validateForm();
+    },[validateForm])
+      
+    const handleSubmit = (e) => {
 
 
+        e.preventDefault()
 
-    return (
+        if (formValid) {
+            //if data valid, create a new data object 
+            const newFormData = {
+                profile: profile,
+                email: email,
+                firstName: firstName,
+                lastName: lastName,
+            };
+            
+            // Retrieve existing data from localStorage
+            const storedData = localStorage.getItem('formData');
+            // If data already exists, append the new data to it
+            if (storedData) {
+                const parsedData = JSON.parse(storedData);
+                parsedData.push(newFormData);
+                localStorage.setItem('formData', JSON.stringify(parsedData));
+            } else {
+                // If no data exists, create a new array and save the new data
+                const formDataArray = [newFormData];
+                localStorage.setItem('formData', JSON.stringify(formDataArray));
+            }
+            handleAddUser();
+            
+        }
+
+    }
+
+
+    return toggleForm && (
         <form className='form-container d-flex flex-row justify-content-between align-items-center gap-4 border mt-4 p-4 w-100' 
         onSubmit={handleSubmit}>
             <div className='input-field d-flex gap-4 justify-content-between flex-column w-100 needs-validation'>
