@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Container, Table, Button} from 'reactstrap';
 import AddUser from './AddUser'
 
 function Index() {
 
 	const [toggleForm, setToggleForm] = useState(false)
-	
+	const [userData, setUserData] = useState([]);
+
+	useEffect(() => {
+		let data = JSON.parse(localStorage.getItem('formData'))
+		setUserData(data)
+	}, [])
+
+
 	return (
 		<Container>
 			<div className='mt-3 text-right'>
@@ -16,7 +23,7 @@ function Index() {
 				<AddUser />
 			}
 
-			<Table className='mt-3'>
+			<Table className='mt-5'>
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -28,10 +35,28 @@ function Index() {
 					</tr>
 				</thead>
 
+				{userData && userData.length > 0 &&
 				<tbody>
+				{userData.map((user, index) => {
+					return (
+						<tr key={index}>
+						<th scope='row'>{index +1}</th>
+						<td>{userData? user.profile : 'No profile specified'}</td>
+						<td>{userData? user.email : 'No email specified'}</td>
+						<td>{userData? user.firstName : 'No first name specified'}</td>
+						<td>{userData? user.lastName : 'No last name specified'}</td>
+						<td />
+					</tr>
+					)
+				})}
+				
+					
+				</tbody>	
+			}
+				{/* <tbody>
 					<tr>
 						<th scope='row'>1</th>
-						<td />
+						<td>{userData ? userData[0].profile : null}</td>
 						<td />
 						<td>Mark</td>
 						<td>Otto</td>
@@ -53,7 +78,7 @@ function Index() {
 						<td>the Bird</td>
 						<td />
 					</tr>
-				</tbody>
+				</tbody> */}
 			</Table>
 		</Container>
 	);
