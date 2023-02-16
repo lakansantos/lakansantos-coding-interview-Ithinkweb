@@ -26,8 +26,8 @@ thead{
     width: auto;
 }
 
-.table{
-    width: 100%;
+.tables{
+    max-width: 100%;
 }
 
 .form-container-edit{
@@ -72,6 +72,10 @@ thead{
 @media (max-width: 900px){
     .form-container{
         width: 50%;
+    }
+
+    .tables{
+        max-width:25px;
     }
 
 }

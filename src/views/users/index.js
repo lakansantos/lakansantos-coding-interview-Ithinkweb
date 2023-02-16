@@ -37,7 +37,7 @@ function Index() {
 				<AddUser  handleAddUser={handleAddUser} />
 			}
 
-			<Table className='mt-5 table'>
+			<Table className='mt-5 tables table-hover table-responsive'>
 				<thead className='text-white'>
 					<tr>
 						<th>ID</th>

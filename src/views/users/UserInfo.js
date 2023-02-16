@@ -24,7 +24,7 @@ const UserInfo = ({index, user, usersData, setUserData}) => {
                     onClick={() => setShowEditForm(!showEditForm)} /> 
                     {showEditForm && 
                         (
-                            <EditUser setShowEditForm={setShowEditForm} index={index} usersData={usersData} setUserData={setUserData}/>
+                            <EditUser setShowEditForm={setShowEditForm} index={index} usersData={usersData} setUserData={setUserData} user={user}/>
                         )
                     }
                     <AiFillDelete className='action-icons' style={{
