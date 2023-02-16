@@ -25,6 +25,8 @@ function Index() {
 		setToggleForm(false)
 	}, [])
 
+
+
 	return (
 		<Container>
 			<div className='mt-3 text-right'>
@@ -36,7 +38,7 @@ function Index() {
 			}
 
 			<Table className='mt-5 table'>
-				<thead>
+				<thead className='text-white'>
 					<tr>
 						<th>ID</th>
 						<th>Profile</th>
@@ -51,7 +53,7 @@ function Index() {
 				<tbody>
 				{userData.map((user, index) => {
 					return user ?(
-						<UserInfo key={index} user={user} index={index}/>
+						<UserInfo key={index} user={user} index={index} usersData={userData}  setUserData={setUserData}/>
 					)  : null
 				})}
 				

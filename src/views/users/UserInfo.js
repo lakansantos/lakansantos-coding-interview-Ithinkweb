@@ -2,7 +2,7 @@ import {MdOutlineEdit} from 'react-icons/md'
 import {AiFillDelete} from 'react-icons/ai'
 import DeleteUser from './DeleteUser';
 
-const UserInfo = ({index, user}) => {
+const UserInfo = ({index, user, usersData, setUserData}) => {
     return (
         <>
         <tr key={index}> 
@@ -19,7 +19,7 @@ const UserInfo = ({index, user}) => {
                     <AiFillDelete className='action-icons' style={{
                         color: '#e74c3c'
                     }}
-                    onClick={(e) => DeleteUser({index})}
+                    onClick={() => DeleteUser({index, usersData, setUserData})}    
                     />
                 </div>
             </td>
