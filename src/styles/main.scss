@@ -75,9 +75,12 @@ thead{
     height: 40px;
     border: 1px solid rgb(180, 180, 180);
 }
+
+
+
 @media (max-width: 900px){
     .form-container{
-        width: 50%;
+        width: 100%;
     }
 
     .tables{
