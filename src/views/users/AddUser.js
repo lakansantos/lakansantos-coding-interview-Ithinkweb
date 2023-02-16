@@ -22,14 +22,18 @@ function AddUser ({handleAddUser}) {
 
         if(profile === '') {
             setProfileError('Profile is required!')
+            // isProfileValid  = false
+
         } else {
             setProfileError('')
         }
 
         if(email === '') {
             setEmailError('Email is required!')
+            // isEmailValid = false
         } else if (!/\S+@\S+\.\S+/.test(email)){
             setEmailError('Invalid email address')
+            // isEmailValid  = false
         } else {
             setEmailError('')
         }
@@ -37,12 +41,14 @@ function AddUser ({handleAddUser}) {
 
         if(firstName === '') {
             setFirstNameError('First Name is required!')
+            // isFirstNameValid = false
         } else {
             setFirstNameError('')
         }
 
         if(lastName === '') {
             setLastNameError('Last Name is required!')
+            // isLastNameValid = false
         } else {
             setLastNameError('')
         }

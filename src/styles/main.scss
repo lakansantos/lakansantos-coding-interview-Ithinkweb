@@ -30,7 +30,45 @@ thead{
     width: 100%;
 }
 
+.form-container-edit{
+    position: absolute;
+    left: 0%;
+    right: 50%;
+    top: 0%;
+    bottom: 50%;
+    height: 100vh;
+    width: 100%;
+    background: rgba(0,0,0, .5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+.form-wrapper{
+    background: rgb(255,255,255);
+    width: 400px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.form-edit{
+    width: inherit;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
+}
+
+
+.input-edit{
+    border-radius: 6px;
+    height: 40px;
+    border: 1px solid rgb(180, 180, 180);
+}
 @media (max-width: 900px){
     .form-container{
         width: 50%;
