@@ -108,12 +108,6 @@ function AddUser ({handleAddUser}) {
         <form className='form-container d-flex flex-row justify-content-between align-items-center gap-4 border mt-4 p-4 ' 
         onSubmit={handleSubmit}>
             <div className='input-field d-flex gap-4 justify-content-between flex-column w-100 needs-validation'>
-                <div className='w-100'>
-                    <input type={'file'} placeholder={'Profile'}  accept='image/*' className={profileError ? 'border-danger form-control' : 'w-100 form-control'} onChange={handleProfileChange} />
-                    {profileError &&
-                    <span className='text-danger text-center'>{profileError}</span>
-                    }
-                </div>
 
                 <div>
                     <input type={'text'} placeholder={'Email'}   className={emailError ? 'border-danger form-control' : 'w-100 form-control'}  onChange={e => setEmail(e.target.value)} />
@@ -134,6 +128,12 @@ function AddUser ({handleAddUser}) {
                     }
                 </div>
                 
+                <div className='w-100'>
+                    <input type={'file'} placeholder={'Profile'}  accept='image/*' className={profileError ? 'border-danger form-control' : 'w-100 form-control'} onChange={handleProfileChange} />
+                    {profileError &&
+                    <span className='text-danger text-center'>{profileError}</span>
+                    }
+                </div>
                 <Button color='primary' className='submit-btn'>Submit</Button>
             </div>
         

@@ -99,12 +99,6 @@ const EditUser = ({index, usersData, user, setUserData, setShowEditForm}) => {
                 <form className="form-edit" onSubmit={handleSave}>
                     <h1 style={{textAlign: 'left', fontWeight: 'bold'}}  className="w-75">Edit</h1>
                     <div className="w-100 d-flex flex-column justify-content-center align-items-center">
-                        <input type={'file'} placeholder={'Profile'} accept='image/*' className={profileError ? 'border-danger form-control' : 'w-75 form-control'} onChange={handleProfileChange} />
-                        {profileError &&
-                        <span className='text-danger w-75'>{profileError}</span>
-                        }
-                    </div>
-                    <div className="w-100 d-flex flex-column justify-content-center align-items-center">
                         <input type="text" placeholder="Email" className="w-75 input-edit form-control"
                         value={emailValue} readOnly={false} onChange={e => setemailValue(e.target.value)} 
                         />
@@ -126,6 +120,12 @@ const EditUser = ({index, usersData, user, setUserData, setShowEditForm}) => {
                         />
                         {lastNameError &&
                         <span className='text-danger w-75'>{lastNameError}</span>
+                        }
+                    </div>
+                    <div className="w-100 d-flex flex-column justify-content-center align-items-center">
+                        <input type={'file'} placeholder={'Profile'} accept='image/*' className={profileError ? 'border-danger form-control' : 'w-75 form-control'} onChange={handleProfileChange} />
+                        {profileError &&
+                        <span className='text-danger w-75'>{profileError}</span>
                         }
                     </div>
                     <div className="button-container-edit d-flex gap-2 align-items-start w-75">
