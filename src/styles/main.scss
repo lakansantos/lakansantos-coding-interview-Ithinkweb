@@ -46,8 +46,9 @@ thead{
 
 .form-wrapper{
     background: rgb(255,255,255);
+    max-height: 700px;
     width: 400px;
-    height: 500px;
+    min-height: 500px;
     display: flex;
     flex-direction: column;
     justify-content: center;
