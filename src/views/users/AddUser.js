@@ -8,35 +8,28 @@ function AddUser ({handleAddUser}) {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
 
+    const [formValid, setFormValid] = useState(false);  
+    const [toggleForm,setToggleForm] = useState(true)
+    const [sw, setSw] = useState(false)
+    
     const [profileError, setProfileError] = useState('')
     const [emailError, setEmailError] = useState('')
     const [firstNameError, setFirstNameError] = useState('')
     const [lastNameError, setLastNameError] = useState('')
 
 
-    const [formValid, setFormValid] = useState(false);  
-    const [toggleForm,setToggleForm] = useState(true)
-    const [sw, setSw] = useState(false)
-
     const validateForm = useCallback(() => {
-        let isProfileValid = true;
-        let isEmailValid = true;
-        let isFirstNameValid = true;
-        let isLastNameValid = true;
+
         if(profile === '') {
             setProfileError('Profile is required!')
-            isProfileValid  = false
-
         } else {
             setProfileError('')
         }
 
         if(email === '') {
             setEmailError('Email is required!')
-            isEmailValid = false
         } else if (!/\S+@\S+\.\S+/.test(email)){
             setEmailError('Invalid email address')
-            isEmailValid  = false
         } else {
             setEmailError('')
         }
@@ -44,20 +37,18 @@ function AddUser ({handleAddUser}) {
 
         if(firstName === '') {
             setFirstNameError('First Name is required!')
-            isFirstNameValid = false
         } else {
             setFirstNameError('')
         }
 
         if(lastName === '') {
             setLastNameError('Last Name is required!')
-            isLastNameValid = false
         } else {
             setLastNameError('')
         }
 
 
-        setFormValid(isProfileValid && isEmailValid && isFirstNameValid && isLastNameValid);
+        setFormValid(firstName && lastName && profile && email);
     },  [profile, email, firstName, lastName])
 
     useEffect(() => {
