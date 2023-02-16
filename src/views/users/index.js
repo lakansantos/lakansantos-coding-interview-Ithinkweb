@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import {Container, Table, Button} from 'reactstrap';
 import AddUser from './AddUser'
-import {MdOutlineEdit} from 'react-icons/md'
-import {AiFillDelete} from 'react-icons/ai'
+import UserInfo from './UserInfo';
 
 function Index() {
 
@@ -36,7 +35,7 @@ function Index() {
 				<AddUser  handleAddUser={handleAddUser} />
 			}
 
-			<Table className='mt-5'>
+			<Table className='mt-5 table'>
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -45,7 +44,6 @@ function Index() {
 						<th>First Name</th>
 						<th>Last Name</th>
 						<th>Action</th>
-						<th />
 					</tr>
 				</thead>
 
@@ -53,19 +51,7 @@ function Index() {
 				<tbody>
 				{userData.map((user, index) => {
 					return user ?(
-						<tr key={index}>
-							<th scope='row'>{index +1}</th>
-							<td>{user.profile}</td>
-							<td>{user.email}</td>
-							<td>{user.firstName}</td>
-							<td>{user.lastName}</td>
-							<td>
-								<div className="d-flex gap-3">
-									<MdOutlineEdit className='action-icons'/> 
-									<AiFillDelete className='action-icons'/> 
-								</div>
-							</td>
-						</tr>
+						<UserInfo key={index} user={user} index={index}/>
 					)  : null
 				})}
 				

@@ -77,7 +77,7 @@ function AddUser ({handleAddUser}) {
             
             // Retrieve existing data from localStorage
             const storedData = localStorage.getItem('formData');
-            // If data already exists, append the new data to it
+            // If data already exists, push the new data to it
             if (storedData) {
                 const parsedData = JSON.parse(storedData);
                 parsedData.push(newFormData);
@@ -99,7 +99,7 @@ function AddUser ({handleAddUser}) {
 
 
     return toggleForm && (
-        <form className='form-container d-flex flex-row justify-content-between align-items-center gap-4 border mt-4 p-4 w-100' 
+        <form className='form-container d-flex flex-row justify-content-between align-items-center gap-4 border mt-4 p-4 ' 
         onSubmit={handleSubmit}>
             <div className='input-field d-flex gap-4 justify-content-between flex-column w-100 needs-validation'>
                 <div className='w-100'>
@@ -128,7 +128,7 @@ function AddUser ({handleAddUser}) {
                     }
                 </div>
                 
-                <Button color='primary' className='w-25'>Submit</Button>
+                <Button color='primary' className='submit-btn'>Submit</Button>
             </div>
         
         </form>
