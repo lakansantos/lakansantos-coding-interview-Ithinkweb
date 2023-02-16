@@ -12,7 +12,7 @@ const UserInfo = ({index, user, usersData, setUserData}) => {
         <>
         <tr key={index}> 
             <th scope='row'>{index +1}</th>
-            <td>{user.profile}</td>
+            <td> <img src={user.profile} alt="profile" className='img-profile'/></td>
             <td>{user.email}</td>
             <td>{user.firstName}</td>
             <td>{user.lastName}</td>

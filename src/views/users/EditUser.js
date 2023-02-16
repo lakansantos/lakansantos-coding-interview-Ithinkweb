@@ -8,7 +8,6 @@ const EditUser = ({index, usersData, user, setUserData, setShowEditForm}) => {
     const [firstNameValue, setfirstNameValue] = useState(user.firstName)
     const [lastNameValue, setplastNameValue] = useState(user.lastName)
     const [sw, setSw] = useState(false)
-    const [newValue, setNewValue] = useState([]);
     const [formValid, setFormValid] = useState(false); 
 
     const [profileError, setProfileError] = useState('')
@@ -82,16 +81,25 @@ const EditUser = ({index, usersData, user, setUserData, setShowEditForm}) => {
             if(!sw) setSw(true)
             if(sw) validateForm();
         }
-
-        
     }
+
+    const handleProfileChange = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            setprofileValue(event.target.result);
+        };
+      
+        reader.readAsDataURL(file);
+      };
+
     return !removeEditForm && (
        <div className="form-container-edit">
             <div className="form-wrapper">
                 <form className="form-edit" onSubmit={handleSave}>
                     <h1 style={{textAlign: 'left', fontWeight: 'bold'}}  className="w-75">Edit</h1>
                     <div className="w-100 d-flex flex-column justify-content-center align-items-center">
-                        <input type="text" placeholder="Profile" className="w-75 input-edit form-control" value={profileValue} readOnly={false} onChange={e => setprofileValue(e.target.value)} />
+                        <input type={'file'} placeholder={'Profile'} accept='image/*' className={profileError ? 'border-danger form-control' : 'w-75 form-control'} onChange={handleProfileChange} />
                         {profileError &&
                         <span className='text-danger w-75'>{profileError}</span>
                         }

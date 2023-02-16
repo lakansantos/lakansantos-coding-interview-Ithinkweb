@@ -22,7 +22,6 @@ function AddUser ({handleAddUser}) {
 
         if(profile === '') {
             setProfileError('Profile is required!')
-            // isProfileValid  = false
 
         } else {
             setProfileError('')
@@ -30,10 +29,8 @@ function AddUser ({handleAddUser}) {
 
         if(email === '') {
             setEmailError('Email is required!')
-            // isEmailValid = false
         } else if (!/\S+@\S+\.\S+/.test(email)){
             setEmailError('Invalid email address')
-            // isEmailValid  = false
         } else {
             setEmailError('')
         }
@@ -41,14 +38,12 @@ function AddUser ({handleAddUser}) {
 
         if(firstName === '') {
             setFirstNameError('First Name is required!')
-            // isFirstNameValid = false
         } else {
             setFirstNameError('')
         }
 
         if(lastName === '') {
             setLastNameError('Last Name is required!')
-            // isLastNameValid = false
         } else {
             setLastNameError('')
         }
@@ -97,13 +92,24 @@ function AddUser ({handleAddUser}) {
 
     }
 
+    const handleProfileChange = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+      
+        reader.onload = (event) => {
+          setProfile(event.target.result);
+        };
+      
+        reader.readAsDataURL(file);
+      };
+
 
     return toggleForm && (
         <form className='form-container d-flex flex-row justify-content-between align-items-center gap-4 border mt-4 p-4 ' 
         onSubmit={handleSubmit}>
             <div className='input-field d-flex gap-4 justify-content-between flex-column w-100 needs-validation'>
                 <div className='w-100'>
-                    <input type={'text'} placeholder={'Profile'}  className={profileError ? 'border-danger form-control' : 'w-100 form-control'} onChange={e => setProfile(e.target.value)} />
+                    <input type={'file'} placeholder={'Profile'}  accept='image/*' className={profileError ? 'border-danger form-control' : 'w-100 form-control'} onChange={handleProfileChange} />
                     {profileError &&
                     <span className='text-danger text-center'>{profileError}</span>
                     }
