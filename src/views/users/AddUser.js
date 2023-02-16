@@ -4,13 +4,16 @@ import {Button} from 'reactstrap'
 function AddUser ({handleAddUser}) {
 
     const [profile, setProfile] = useState('')
-    const [profileError, setProfileError] = useState('')
     const [email, setEmail] = useState('')
-    const [emailError, setEmailError] = useState('')
     const [firstName, setFirstName] = useState('')
-    const [firstNameError, setFirstNameError] = useState('')
     const [lastName, setLastName] = useState('')
+
+    const [profileError, setProfileError] = useState('')
+    const [emailError, setEmailError] = useState('')
+    const [firstNameError, setFirstNameError] = useState('')
     const [lastNameError, setLastNameError] = useState('')
+
+
     const [formValid, setFormValid] = useState(false);  
     const [toggleForm,setToggleForm] = useState(true)
     const [sw, setSw] = useState(false)

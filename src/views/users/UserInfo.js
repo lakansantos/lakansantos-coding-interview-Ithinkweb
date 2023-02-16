@@ -1,8 +1,13 @@
 import {MdOutlineEdit} from 'react-icons/md'
 import {AiFillDelete} from 'react-icons/ai'
 import DeleteUser from './DeleteUser';
+import EditUser from './EditUser';
+import { useState } from 'react';
 
 const UserInfo = ({index, user, usersData, setUserData}) => {
+
+    const [showEditForm, setShowEditForm] = useState(false)
+
     return (
         <>
         <tr key={index}> 
@@ -15,11 +20,17 @@ const UserInfo = ({index, user, usersData, setUserData}) => {
                 <div className="d-flex gap-3">
                     <MdOutlineEdit className='action-icons' style={{
                         color: '#3498db',
-                    }}/> 
+                    }}
+                    onClick={() => setShowEditForm(!showEditForm)} /> 
+                    {showEditForm && 
+                        (
+                            <EditUser />
+                        )
+                    }
                     <AiFillDelete className='action-icons' style={{
                         color: '#e74c3c'
                     }}
-                    onClick={() => DeleteUser({index, usersData, setUserData})}    
+                    onClick={() => DeleteUser({index, usersData, setUserData, })}    
                     />
                 </div>
             </td>
