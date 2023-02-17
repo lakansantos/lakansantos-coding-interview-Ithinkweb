@@ -9,6 +9,7 @@ function Index() {
 	const [toggleForm, setToggleForm] = useState(false)
 	const [userData, setUserData] = useState([]);
 	const [query, setQuery] = useState('')
+	const [filteredData, setFilteredData] = useState(null)
 	const getUserData = () => {
 		let data = JSON.parse(localStorage.getItem('formData'))
 		setUserData(data)
@@ -27,14 +28,20 @@ function Index() {
 	}, [])
 
 
-	const filteredData = userData.filter(item => {
-		return (
-			item.profile.toLowerCase().includes(query.toLowerCase()) ||
-			item.email.toLowerCase().includes(query.toLowerCase()) ||
-			item.firstName.toLowerCase().includes(query.toLowerCase()) ||
-			item.lastName.toLowerCase().includes(query.toLowerCase())
-		)
-	})
+	useEffect(() => {
+		if(userData){
+			let filteringData = userData.filter(item => {
+				return (
+					item.profile.toLowerCase().includes(query.toLowerCase()) ||
+					item.email.toLowerCase().includes(query.toLowerCase()) ||
+					item.firstName.toLowerCase().includes(query.toLowerCase()) ||
+					item.lastName.toLowerCase().includes(query.toLowerCase())
+				)
+			})
+			setFilteredData(filteringData)
+			
+		}
+	}, [userData, query])
 	return (
 		<Container>
 			<div className='mt-3 text-right d-flex justify-content-between align-items-center'>
