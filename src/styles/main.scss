@@ -77,6 +77,24 @@ thead{
     border: 1px solid rgb(180, 180, 180);
 }
 
+//for button in pagination
+.activeButtons{
+    background-color: aqua;
+    padding: 5px;
+    height: 40px;
+    width: 40px;
+}
+.pagination-page {
+    display: flex;
+    gap: 5px;
+    
+}
+.pageButton{
+    border: none;
+    padding: 5px;
+    height: 40px;
+    width: 40px;
+}
 
 
 @media (max-width: 900px){

@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import {Container, Table, Button} from 'reactstrap';
 import AddUser from './AddUser'
 import UserInfo from './UserInfo';
+import Pagination from './Pagination';
 import  {FcSearch} from 'react-icons/fc'
 
 function Index() {
@@ -10,6 +11,9 @@ function Index() {
 	const [userData, setUserData] = useState([]);
 	const [query, setQuery] = useState('')
 	const [filteredData, setFilteredData] = useState(null)
+	const [currentPage, setCurrentPage] = useState(1)
+	const [rowsPerPage, setRowsPerPage] = useState(10)
+	const [currentRow, setCurrentRow] = useState(null)
 
 	const getUserData = () => {
 		let data = JSON.parse(localStorage.getItem('formData'))
@@ -43,6 +47,17 @@ function Index() {
 			
 		}
 	}, [userData, query])
+
+	const lastRowIndex = currentPage * rowsPerPage;
+	const firstRowIndex = lastRowIndex - rowsPerPage
+
+	useEffect(() => {
+		if(filteredData){
+
+			setCurrentRow(filteredData.slice(firstRowIndex, lastRowIndex))
+		}	
+	}, [setCurrentRow, currentPage, rowsPerPage, filteredData])
+
 	return (
 		<Container>
 			<div className='mt-3 text-right d-flex justify-content-between align-items-center'>
@@ -72,8 +87,11 @@ function Index() {
 
 				{userData && userData.length > 0 &&  filteredData.length > 0 ?
 				<tbody>
-				{filteredData.map((user, index) => (
-					<UserInfo key={index} user={user} index={index} usersData={userData}  setUserData={setUserData}/>
+				{currentRow.map((user, index) => (
+					<tr key={firstRowIndex +index}> 
+						<th scope='row'>{firstRowIndex + index +1}</th>
+						<UserInfo key={index} user={user} index={firstRowIndex + index} usersData={userData}  setUserData={setUserData} currentRow={currentRow} />
+					</tr>
 				))}
 				</tbody> 
 				: query !== '' ? (
@@ -87,6 +105,7 @@ function Index() {
 			}
 
 			</Table>
+			<Pagination totalRows ={userData?.length} rowsPerPage={rowsPerPage}  setCurrentPage={setCurrentPage} currentPage={currentPage}/>
 		</Container>
 	);
 }

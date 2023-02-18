@@ -10,8 +10,6 @@ const UserInfo = ({index, user, usersData, setUserData}) => {
     const [showDeleteModal, setShowDeleteModal] = useState(false)
     return (
         <>
-        <tr key={index}> 
-            <th scope='row'>{index +1}</th>
             <td>{user.profile ? <img src={user.profile} alt="profile" className='img-profile'/> : 'No avatar'}</td>
             <td>{user.email}</td>
             <td>{user.firstName}</td>
@@ -35,7 +33,6 @@ const UserInfo = ({index, user, usersData, setUserData}) => {
                     }
                 </div>
             </td>
-		</tr>
         </>
     )
 }
