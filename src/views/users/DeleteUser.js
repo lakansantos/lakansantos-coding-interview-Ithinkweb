@@ -18,6 +18,9 @@ const DeleteUser = ({index, usersData, setUserData, setShowDeleteModal}) => {
             <div className="form-wrapper p-3">
                 <div className="d-flex flex-column justify-content-evenly" style={{height: '500px'}}>
                     <h1 style={{textAlign: 'center', fontWeight: 'bold'}}  className="w-100">Delete User</h1>
+                    <p style={{fontSize: '1rem', width: '100%', textAlign: 'center'}}>Are you sure you want to delete this user
+                    <span style={{fontWeight: 'bold', display:'inline-block'}}>{user?.firstName + ' ' + user?.lastName}</span>?
+                    </p>
                     <div className="d-flex flex-row justify-content-between align-items-center border">
                         {user?.profile  ?(
                             <img src={user.profile} alt="Profile" style={{width: '40%', height: '100%', background: 'black'}}/>
@@ -30,7 +33,7 @@ const DeleteUser = ({index, usersData, setUserData, setShowDeleteModal}) => {
                             <p>Email: {user?.email}</p>
                         </div>
                     </div>
-                    <div className="buttonContainer d-flex justify-content-center align-items-center gap-2" style={{height: '100px'}}>
+                    <div className="buttonContainer d-flex  flex-row justify-content-center align-items-center gap-2" style={{height: '100px'}}>
                         <Button onClick={() => setShowDeleteModal(false)}>Cancel</Button>
                         <Button onClick={handleDelete} color="danger">Delete</Button>
                     </div>
