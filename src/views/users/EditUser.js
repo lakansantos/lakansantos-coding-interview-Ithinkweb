@@ -7,7 +7,7 @@ const EditUser = ({index, usersData, user, setUserData, setShowEditForm}) => {
     const [emailValue, setemailValue] = useState(user.email)
     const [firstNameValue, setfirstNameValue] = useState(user.firstName)
     const [lastNameValue, setplastNameValue] = useState(user.lastName)
-    const [sw, setSw] = useState(false)
+    const [switches, setSwitch] = useState(false)
     const [formValid, setFormValid] = useState(false); 
 
     const [profileError, setProfileError] = useState('')
@@ -18,8 +18,9 @@ const EditUser = ({index, usersData, user, setUserData, setShowEditForm}) => {
 
 
     const validateForm = useCallback(() => {
-
-        if(emailValue === '') {
+        if(emailValue === user.email){
+            setEmailError('You have made no changes')
+        } else if(emailValue === '') {
             setEmailError('Email is required!')
         } else if (!/\S+@\S+\.\S+/.test(emailValue)){
             setEmailError('Invalid email address')
@@ -27,26 +28,32 @@ const EditUser = ({index, usersData, user, setUserData, setShowEditForm}) => {
             setEmailError('')
         }
  
-
-        if(firstNameValue === '') {
+        if(firstNameValue === user.firstName){
+            setFirstNameError('You have made no changes')
+        } else if(firstNameValue === '') {
             setFirstNameError('First Name is required!')
         } else {
             setFirstNameError('')
         }
 
-        if(lastNameValue === '') {
+        if(lastNameValue === user.lastName){
+            setLastNameError('You have made no changes')
+        } else if(lastNameValue === '') {
             setLastNameError('Last Name is required!')
         } else {
             setLastNameError('')
         }
 
 
-        setFormValid(firstNameValue && lastNameValue  && emailValue);
+        setFormValid((firstNameValue!==user.firstName || lastNameValue!==user.lastName  || emailValue!==user.email) && firstNameValue && lastNameValue && emailValue.match(/\S+@\S+\.\S+/) || (profileValue));
     },  [emailValue, firstNameValue, lastNameValue])
 
+
+  
+
     useEffect(() => {
-        if(!sw)setSw(true)
-        if(sw) validateForm();
+        if(!switches) setSwitch(true)
+        if(switches) validateForm();
     },[validateForm])
 
     const handleEdit = () => {
@@ -71,9 +78,11 @@ const EditUser = ({index, usersData, user, setUserData, setShowEditForm}) => {
             handleEdit();
             setShowEditForm(false)
         } else {
-            if(!sw) setSw(true)
-            if(sw) validateForm();
+            if(!switches) setSwitch(true)
+            if(switches) validateForm();
         }
+
+        
     }
 
     const handleProfileChange = (e) => {

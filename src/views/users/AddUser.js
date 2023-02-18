@@ -16,7 +16,6 @@ function AddUser ({handleAddUser, setToggleForm}) {
     const [firstNameError, setFirstNameError] = useState('')
     const [lastNameError, setLastNameError] = useState('')
 
-
     const validateForm = useCallback(() => {
 
         if(email === '') {
@@ -41,8 +40,8 @@ function AddUser ({handleAddUser, setToggleForm}) {
         }
 
 
-        setFormValid(firstName && lastName  && email);
-    },  [email, firstName, lastName])
+        setFormValid(firstName && lastName && email.match(/\S+@\S+\.\S+/));
+    },  [firstName, lastName, email])
 
     useEffect(() => {
         if(!sw)setSw(true)
@@ -79,7 +78,6 @@ function AddUser ({handleAddUser, setToggleForm}) {
         } else {
             if(!sw)setSw(true)
             if(sw) validateForm();
-
         }
 
     }
