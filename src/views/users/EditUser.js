@@ -19,13 +19,6 @@ const EditUser = ({index, usersData, user, setUserData, setShowEditForm}) => {
 
     const validateForm = useCallback(() => {
 
-        if(profileValue === '') {
-            setProfileError('Profile is required!')
-
-        } else {
-            setProfileError('')
-        }
-
         if(emailValue === '') {
             setEmailError('Email is required!')
         } else if (!/\S+@\S+\.\S+/.test(emailValue)){
@@ -48,8 +41,8 @@ const EditUser = ({index, usersData, user, setUserData, setShowEditForm}) => {
         }
 
 
-        setFormValid(firstNameValue && lastNameValue && profileValue && emailValue);
-    },  [profileValue, emailValue, firstNameValue, lastNameValue])
+        setFormValid(firstNameValue && lastNameValue  && emailValue);
+    },  [emailValue, firstNameValue, lastNameValue])
 
     useEffect(() => {
         if(!sw)setSw(true)
@@ -68,7 +61,6 @@ const EditUser = ({index, usersData, user, setUserData, setShowEditForm}) => {
         const editedData = [...usersData]
         editedData.splice(index, 1, newData)
         localStorage.setItem('formData', JSON.stringify(editedData))
-        setShowEditForm(false)
         setUserData(editedData)
     }
 
@@ -77,6 +69,7 @@ const EditUser = ({index, usersData, user, setUserData, setShowEditForm}) => {
 
         if(formValid){
             handleEdit();
+            setShowEditForm(false)
         } else {
             if(!sw) setSw(true)
             if(sw) validateForm();
@@ -94,10 +87,10 @@ const EditUser = ({index, usersData, user, setUserData, setShowEditForm}) => {
       };
 
     return !removeEditForm && (
-       <div className="form-container-edit">
+       <div className="form-container-item">
             <div className="form-wrapper">
-                <form className="form-edit" onSubmit={handleSave}>
-                    <h1 style={{textAlign: 'left', fontWeight: 'bold'}}  className="w-75">Edit</h1>
+                <form className="form-item" onSubmit={handleSave}>
+                    <h1 style={{textAlign: 'left', fontWeight: 'bold'}}  className="w-75">Edit User</h1>
                     <div className="w-100 d-flex flex-column justify-content-center align-items-center">
                         <input type="text" placeholder="Email" className="w-75 input-edit form-control"
                         value={emailValue} readOnly={false} onChange={e => setemailValue(e.target.value)} 
@@ -124,9 +117,6 @@ const EditUser = ({index, usersData, user, setUserData, setShowEditForm}) => {
                     </div>
                     <div className="w-100 d-flex flex-column justify-content-center align-items-center">
                         <input type={'file'} placeholder={'Profile'} accept='image/*' className={profileError ? 'border-danger form-control' : 'w-75 form-control'} onChange={handleProfileChange} />
-                        {profileError &&
-                        <span className='text-danger w-75'>{profileError}</span>
-                        }
                     </div>
                     <div className="button-container-edit d-flex gap-2 align-items-start w-75">
                         <Button onClick={() => setShowEditForm(false)}>Cancel</Button>

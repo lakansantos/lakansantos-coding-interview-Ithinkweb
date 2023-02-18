@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import {Button} from 'reactstrap'   
 
-function AddUser ({handleAddUser}) {
+function AddUser ({handleAddUser, setToggleForm}) {
 
     const [profile, setProfile] = useState('')
     const [email, setEmail] = useState('')
@@ -9,7 +9,6 @@ function AddUser ({handleAddUser}) {
     const [lastName, setLastName] = useState('')
 
     const [formValid, setFormValid] = useState(false);  
-    const [toggleForm,setToggleForm] = useState(true)
     const [sw, setSw] = useState(false)
     
     const [profileError, setProfileError] = useState('')
@@ -19,13 +18,6 @@ function AddUser ({handleAddUser}) {
 
 
     const validateForm = useCallback(() => {
-
-        if(profile === '') {
-            setProfileError('Profile is required!')
-
-        } else {
-            setProfileError('')
-        }
 
         if(email === '') {
             setEmailError('Email is required!')
@@ -49,8 +41,8 @@ function AddUser ({handleAddUser}) {
         }
 
 
-        setFormValid(firstName && lastName && profile && email);
-    },  [profile, email, firstName, lastName])
+        setFormValid(firstName && lastName  && email);
+    },  [email, firstName, lastName])
 
     useEffect(() => {
         if(!sw)setSw(true)
@@ -104,40 +96,43 @@ function AddUser ({handleAddUser}) {
       };
 
 
-    return toggleForm && (
-        <form className='form-container d-flex flex-row justify-content-between align-items-center gap-4 border mt-4 p-4 ' 
+    return  (
+       <div className='form-container-item'>
+         <div className='form-wrapper'>
+            <form className='form-item' 
         onSubmit={handleSubmit}>
-            <div className='input-field d-flex gap-4 justify-content-between flex-column w-100 needs-validation'>
-
-                <div>
-                    <input type={'text'} placeholder={'Email'}   className={emailError ? 'border-danger form-control' : 'w-100 form-control'}  onChange={e => setEmail(e.target.value)} />
-                    {emailError &&
-                    <span className='text-danger text-center'>{emailError}</span>
-                    }
-                </div>
-                <div>   
-                    <input type={'text'} placeholder={'First Name'}   className={firstNameError ? 'border-danger form-control' : 'w-100 form-control'}  onChange={e => setFirstName(e.target.value)} />
-                    {firstNameError &&
-                    <span className='text-danger text-center'>{firstNameError}</span>
-                    }
-                </div>
-                <div>
-                    <input type={'text'} placeholder={'Last Name'}  className={lastNameError ? 'border-danger form-control' : 'w-100 form-control'} onChange={e => setLastName(e.target.value)} />
-                    {lastNameError &&
-                    <span className='text-danger text-center'>{lastNameError}</span>
-                    }
-                </div>
-                
-                <div className='w-100'>
-                    <input type={'file'} placeholder={'Profile'}  accept='image/*' className={profileError ? 'border-danger form-control' : 'w-100 form-control'} onChange={handleProfileChange} />
-                    {profileError &&
-                    <span className='text-danger text-center'>{profileError}</span>
-                    }
-                </div>
-                <Button color='primary' className='submit-btn'>Submit</Button>
+                    <h1 style={{textAlign: 'left', fontWeight: 'bold'}} className='w-75'>Add user</h1>
+                    <div className='input-field d-flex gap-4 justify-content-center align-items-center flex-column w-100 needs-validation'>
+                        <div className="w-100 d-flex flex-column justify-content-center align-items-center">
+                            <input type={'text'} placeholder={'Email'}   className={`w-75 form-control ${emailError ? 'border-danger' : ''}`}  onChange={e => setEmail(e.target.value)} />
+                            {emailError &&
+                            <span className='text-danger w-75'>{emailError}</span>
+                            }
+                        </div>
+                        <div className="w-100 d-flex flex-column justify-content-center align-items-center">   
+                            <input type={'text'} placeholder={'First Name'}   className={`w-75 form-control ${firstNameError ? 'border-danger' : ''}`}  onChange={e => setFirstName(e.target.value)} />
+                            {firstNameError &&
+                            <span className='text-danger w-75'>{firstNameError}</span>
+                            }
+                        </div>
+                        <div className="w-100 d-flex flex-column justify-content-center align-items-center">
+                            <input type={'text'} placeholder={'Last Name'}  className={`w-75 form-control ${lastNameError ? 'border-danger' : ''}`} onChange={e => setLastName(e.target.value)} />
+                            {lastNameError &&
+                            <span className='text-danger w-75'>{lastNameError}</span>
+                            }
+                        </div>
+                        
+                        <div className="w-100 d-flex flex-column justify-content-center align-items-center">
+                            <input type={'file'} placeholder={'Profile'}  accept='image/*' className={'w-75 form-control'} onChange={handleProfileChange} />
+                        </div>
+                        <div className="button-container-edit d-flex gap-2 align-items-start w-75">
+                                <Button onClick={() => setToggleForm(false)}>Cancel</Button>
+                                <Button color='primary' className='submit-btn'>Submit</Button>
+                        </div>
+                    </div>
+                </form>
             </div>
-        
-        </form>
+       </div>
         
     )  
 }
