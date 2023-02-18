@@ -46,7 +46,7 @@ const EditUser = ({index, usersData, user, setUserData, setShowEditForm}) => {
         }
 
 
-        setFormValid((firstNameValue!==user.firstName || lastNameValue!==user.lastName  || emailValue!==user.email) && firstNameValue && lastNameValue && emailValue.match(/\S+@\S+\.\S+/) || (profileValue));
+        setFormValid((firstNameValue!==user.firstName || lastNameValue!==user.lastName  || emailValue!==user.email || profileValue!==user.profile) && firstNameValue && lastNameValue && emailValue.match(/\S+@\S+\.\S+/) && !emailError && !lastNameError && !firstNameError);
     },  [emailValue, firstNameValue, lastNameValue, profileValue])
 
 
