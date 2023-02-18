@@ -1,21 +1,19 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState, useRef} from 'react'
 import {Button} from 'reactstrap'   
 
 function AddUser ({handleAddUser, setToggleForm}) {
-
+    const modalRef = useRef();
     const [profile, setProfile] = useState('')
     const [email, setEmail] = useState('')
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
-
     const [formValid, setFormValid] = useState(false);  
-    const [sw, setSw] = useState(false)
-    
+    const [switches, setSwitch] = useState(false)
     const [profileError, setProfileError] = useState('')
     const [emailError, setEmailError] = useState('')
     const [firstNameError, setFirstNameError] = useState('')
     const [lastNameError, setLastNameError] = useState('')
-
+    
     const validateForm = useCallback(() => {
 
         if(email === '') {
@@ -44,8 +42,8 @@ function AddUser ({handleAddUser, setToggleForm}) {
     },  [firstName, lastName, email])
 
     useEffect(() => {
-        if(!sw)setSw(true)
-        if(sw) validateForm();
+        if(!switches) setSwitch(true)
+        if(switches) validateForm();
     },[validateForm])
       
     const handleSubmit = (e) => {
@@ -76,8 +74,8 @@ function AddUser ({handleAddUser, setToggleForm}) {
             handleAddUser();
 
         } else {
-            if(!sw)setSw(true)
-            if(sw) validateForm();
+            if(!switches) setSwitch(true)
+            if(switches) validateForm();
         }
 
     }
@@ -91,14 +89,14 @@ function AddUser ({handleAddUser, setToggleForm}) {
         };
       
         reader.readAsDataURL(file);
-      };
+    };
 
 
     return  (
-       <div className='form-container-item'>
-         <div className='form-wrapper'>
+       <div className='form-container-item' >
+         <div className='form-wrapper'> 
             <form className='form-item' 
-        onSubmit={handleSubmit}>
+            onSubmit={handleSubmit}>
                     <h1 style={{textAlign: 'left', fontWeight: 'bold'}} className='w-75'>Add user</h1>
                     <div className='input-field d-flex gap-4 justify-content-center align-items-center flex-column w-100 needs-validation'>
                         <div className="w-100 d-flex flex-column justify-content-center align-items-center">
@@ -131,7 +129,6 @@ function AddUser ({handleAddUser, setToggleForm}) {
                 </form>
             </div>
        </div>
-        
     )  
 }
 

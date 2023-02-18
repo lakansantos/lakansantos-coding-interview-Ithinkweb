@@ -1,10 +1,41 @@
+import { Button } from "reactstrap"
 
 
-const DeleteUser = ({index, usersData, setUserData}) => {
-    const updatedData = usersData.filter((_, i) => i !== index)
-    localStorage.setItem('formData', JSON.stringify(updatedData))
+const DeleteUser = ({index, usersData, setUserData, setShowDeleteModal}) => {
 
-    setUserData(updatedData)
+    const handleDelete = () => {
+        const updatedData = usersData.filter((_, i) => i !== index)
+        localStorage.setItem('formData', JSON.stringify(updatedData))
+    
+        setUserData(updatedData)
+    }
+
+
+    return (
+        <div className="form-container-item">
+            <div className="form-wrapper p-3">
+                <div className="d-flex flex-column justify-content-evenly" style={{height: '500px'}}>
+                    <h1 style={{textAlign: 'center', fontWeight: 'bold'}}  className="w-100">Delete User</h1>
+                    <div className="d-flex flex-row justify-content-between align-items-center border">
+                        {usersData && usersData[index].profile ? (
+                            <img src={usersData[index].profile} alt="Profile" style={{width: '30%', height: '100%', background: 'black'}}/>
+                        ): (
+                            <div style={{height: '100%', width: '50%', objectFit: 'contain'}} className="d-flex flex-column justify-content-center align-items-center bg-black text-white"><img src="/noavatar.png" alt="" />No profile</div>
+                        )}
+                        <div className="details text-start w-100 ms-2 d-flex flex-column">
+                            <p>First name: {usersData[index].firstName}</p>
+                            <p>Last name: {usersData[index].lastName}</p>
+                            <p>Email: {usersData[index].email}</p>
+                        </div>
+                    </div>
+                    <div className="buttonContainer d-flex justify-content-center align-items-center gap-2" style={{height: '100px'}}>
+                        <Button onClick={() => setShowDeleteModal(false)}>Cancel</Button>
+                        <Button onClick={handleDelete} color="danger">Delete</Button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
 }
 
 

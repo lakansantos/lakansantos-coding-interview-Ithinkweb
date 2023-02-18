@@ -7,7 +7,7 @@ import { useState } from 'react';
 const UserInfo = ({index, user, usersData, setUserData}) => {
 
     const [showEditForm, setShowEditForm] = useState(false)
-
+    const [showDeleteModal, setShowDeleteModal] = useState(false)
     return (
         <>
         <tr key={index}> 
@@ -23,13 +23,16 @@ const UserInfo = ({index, user, usersData, setUserData}) => {
                     }}
                     onClick={() => setShowEditForm(!showEditForm)} /> 
                     {showEditForm && 
-                            <EditUser setShowEditForm={setShowEditForm} index={index} usersData={usersData} setUserData={setUserData} user={user}/>
+                        <EditUser setShowEditForm={setShowEditForm} index={index} usersData={usersData} setUserData={setUserData} user={user}/>
                     }
                     <AiFillDelete className='action-icons' style={{
                         color: '#e74c3c'
                     }}
-                    onClick={() => DeleteUser({index, usersData, setUserData, })}    
+                    onClick={() => setShowDeleteModal(!showDeleteModal)}    
                     />
+                    {showDeleteModal && 
+                        <DeleteUser index={index} usersData={usersData} setUserData={setUserData} setShowDeleteModal={setShowDeleteModal} />
+                    }
                 </div>
             </td>
 		</tr>

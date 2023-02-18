@@ -79,7 +79,7 @@ function Index() {
 				: query !== '' ? (
 					<tbody>
 						<tr>
-							<td colspan='6' className='text-center'><h1>No Data Found</h1></td>
+							<td colSpan='6' className='text-center'><h1>No Data Found</h1></td>
 						</tr>
 					</tbody>
 				)  : null
