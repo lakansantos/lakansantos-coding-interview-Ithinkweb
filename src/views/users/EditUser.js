@@ -14,13 +14,12 @@ const EditUser = ({index, usersData, user, setUserData, setShowEditForm}) => {
     const [emailError, setEmailError] = useState('')
     const [firstNameError, setFirstNameError] = useState('')
     const [lastNameError, setLastNameError] = useState('')
-
+    const [editChangeError, setEditChangeError] = useState('')
 
 
     const validateForm = useCallback(() => {
-        if(emailValue === user.email){
-            setEmailError('You have made no changes')
-        } else if(emailValue === '') {
+        
+        if(emailValue === '') {
             setEmailError('Email is required!')
         } else if (!/\S+@\S+\.\S+/.test(emailValue)){
             setEmailError('Invalid email address')
@@ -28,25 +27,27 @@ const EditUser = ({index, usersData, user, setUserData, setShowEditForm}) => {
             setEmailError('')
         }
  
-        if(firstNameValue === user.firstName){
-            setFirstNameError('You have made no changes')
-        } else if(firstNameValue === '') {
+        if(firstNameValue === '') {
             setFirstNameError('First Name is required!')
         } else {
             setFirstNameError('')
         }
 
-        if(lastNameValue === user.lastName){
-            setLastNameError('You have made no changes')
-        } else if(lastNameValue === '') {
+        if(lastNameValue === '') {
             setLastNameError('Last Name is required!')
         } else {
             setLastNameError('')
         }
 
+        if(emailValue === user.email && firstNameValue === user.firstName && lastNameValue === user.lastName && profileValue === user.profile){
+            setEditChangeError('No changes made!')
+        } else{
+            setEditChangeError('')
+        }
+
 
         setFormValid((firstNameValue!==user.firstName || lastNameValue!==user.lastName  || emailValue!==user.email) && firstNameValue && lastNameValue && emailValue.match(/\S+@\S+\.\S+/) || (profileValue));
-    },  [emailValue, firstNameValue, lastNameValue])
+    },  [emailValue, firstNameValue, lastNameValue, profileValue])
 
 
   
@@ -100,6 +101,7 @@ const EditUser = ({index, usersData, user, setUserData, setShowEditForm}) => {
             <div className="form-wrapper">
                 <form className="form-item" onSubmit={handleSave}>
                     <h1 style={{textAlign: 'left', fontWeight: 'bold'}}  className="w-75">Edit User</h1>
+                    {editChangeError && <span className="text-danger text-start w-75">{editChangeError}</span> }
                     <div className="w-100 d-flex flex-column justify-content-center align-items-center">
                         <input type="text" placeholder="Email" className="w-75 input-edit form-control"
                         value={emailValue} readOnly={false} onChange={e => setemailValue(e.target.value)} 

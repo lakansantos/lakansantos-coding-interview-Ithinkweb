@@ -20,11 +20,11 @@ const DeleteUser = ({index, usersData, setUserData, setShowDeleteModal}) => {
                     <h1 style={{textAlign: 'center', fontWeight: 'bold'}}  className="w-100">Delete User</h1>
                     <div className="d-flex flex-row justify-content-between align-items-center border">
                         {user?.profile  ?(
-                            <img src={user.profile} alt="Profile" style={{width: '30%', height: '100%', background: 'black'}}/>
+                            <img src={user.profile} alt="Profile" style={{width: '40%', height: '100%', background: 'black'}}/>
                         ): (
                             <div style={{height: '100%', width: '50%', objectFit: 'contain'}} className="d-flex flex-column justify-content-center align-items-center bg-black text-white"><img src="/noavatar.png" alt="" />No profile</div>
                         )}
-                        <div className="details text-start w-100 ms-2 d-flex flex-column">
+                        <div className="details text-start w-100 ms-3 d-flex flex-column my-3">
                             <p>First name: {user?.firstName}</p>
                             <p>Last name: {user?.lastName}</p>
                             <p>Email: {user?.email}</p>
