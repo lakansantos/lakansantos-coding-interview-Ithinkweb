@@ -9,6 +9,8 @@
     cursor: pointer;
 }
 
+
+
 tr:nth-child(even){
     background-color: rgb(241, 241, 241);
 }
@@ -79,8 +81,9 @@ thead{
 
 //for button in pagination
 .activeButtons{
-    background-color: aqua;
+    background-color: rgb(0, 140, 255);
     padding: 5px;
+    border: none;
     height: 40px;
     width: 40px;
 }
@@ -95,7 +98,103 @@ thead{
     height: 40px;
     width: 40px;
 }
+.user-profile-heading{
+    font-weight: bold;  
+    font-size: 3rem;
+    display: none;
+}
 
+.card-wrapper{
+    background-color: rgba(0, 0, 0, .5);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0%;
+    right: 50%;
+    top: 0%;
+    bottom: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-modal{
+    background: whitesmoke;
+    width: 60%;
+    z-index: 100;
+    position: relative;
+    height: 50%; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.close-btn{
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    border: none;
+    background: none;
+    float: right;
+    margin: 5px;
+}
+
+
+.close-btn span{
+    font-weight: bold;
+    color: #444;
+    line-height: 10px;
+    text-align: center;
+    font-size: 1.5rem;
+}   
+
+
+.profile-details-container{
+    height: 150%;
+    display: flex;
+    flex-direction: row;
+}
+
+
+.profile-avatar-profile-modal{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.no-avatar-wrapper{
+    width: 100%;
+    height: 100%;
+    background-color: #2c3e50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.no-avatar-profile-modal{
+    width: 50%;
+    object-fit: cover;
+    height: 50%;
+}
+
+.img-container-profile-modal{
+    width: 30%;
+}
+
+.texts-details-container{
+    width: 70%;
+    background: whitesmoke;
+    padding: 20px;
+}
+
+.profile-name-profile-modal{
+    font-weight: bold;  
+    font-size: 3rem;
+}
+
+.social-media-container{
+    height: 150px;
+}
 
 @media (max-width: 900px){
     .form-container{
@@ -104,6 +203,30 @@ thead{
 
     .tables{
         max-width:25px;
+    }
+
+    .profile-details-container{
+        margin-top: 20px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .user-profile-heading{
+        text-align: center;
+    }
+
+    .texts-details-container{
+        text-align: center;
+        width: 100%;
+    }
+
+    .user-profile-heading{
+        display: unset;
+    }
+
+    .profile-name-profile-modal{
+        display: none;
     }
 
 }
