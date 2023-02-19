@@ -25,10 +25,10 @@ const UserInfo = ({index, user, usersData, setUserData}) => {
           document.body.style.overflow = 'auto';
         };
       }, [showProfile, showEditForm, showDeleteModal]);
-      
+
     return (
         <>
-            <td>{user.profile ? <img src={user.profile} alt="profile" className='img-profile'/> : 'No avatar'}</td>
+            <td>{user.profile ? <img src={user.profile} alt="profile" className='img-profile' style={{objectFit: 'cover'}}/> : 'No avatar'}</td>
             <td>{user.email}</td>
             <td>{user.firstName}</td>
             <td>{user.lastName}</td>
