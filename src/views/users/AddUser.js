@@ -14,6 +14,8 @@ function AddUser ({handleAddUser, setToggleForm}) {
     const [firstNameError, setFirstNameError] = useState('')
     const [lastNameError, setLastNameError] = useState('')
     
+
+    //for validations
     const validateForm = useCallback(() => {
 
         if(email === '') {
@@ -80,6 +82,7 @@ function AddUser ({handleAddUser, setToggleForm}) {
 
     }
 
+    //to enable users to upload their image as avatar
     const handleProfileChange = (e) => {
         const file = e.target.files[0];
         const reader = new FileReader();

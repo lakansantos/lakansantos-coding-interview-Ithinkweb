@@ -24,7 +24,6 @@ function Index() {
 	}, [setUserData])
 
 
-
 	const handleAddUser = useCallback(() => {
 		let data = JSON.parse(localStorage.getItem('formData')) || []
 		localStorage.setItem('formData', JSON.stringify([...data]))
@@ -32,12 +31,11 @@ function Index() {
 		setToggleForm(false)
 	}, [])
 
-
+	//to filter rows based on query like email, 
 	useEffect(() => {
 		if(userData){
 			let filteringData = userData.filter(item => {
 				return (
-					item.profile.toLowerCase().includes(query.toLowerCase()) ||
 					item.email.toLowerCase().includes(query.toLowerCase()) ||
 					item.firstName.toLowerCase().includes(query.toLowerCase()) ||
 					item.lastName.toLowerCase().includes(query.toLowerCase())
@@ -51,6 +49,7 @@ function Index() {
 	const lastRowIndex = currentPage * rowsPerPage;
 	const firstRowIndex = lastRowIndex - rowsPerPage
 
+	//for pagination
 	useEffect(() => {
 		if(filteredData){
 

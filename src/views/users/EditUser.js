@@ -51,11 +51,12 @@ const EditUser = ({index, usersData, user, setUserData, setShowEditForm}) => {
 
 
   
-
+    //The validation will only start if user starts typing in the form
     useEffect(() => {
         if(!switches) setSwitch(true)
         if(switches) validateForm();
     },[validateForm])
+
 
     const handleEdit = () => {
         
@@ -86,6 +87,7 @@ const EditUser = ({index, usersData, user, setUserData, setShowEditForm}) => {
         
     }
 
+    //to handle the users uploading their avatar as image
     const handleProfileChange = (e) => {
         const file = e.target.files[0];
         const reader = new FileReader();
